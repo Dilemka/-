@@ -50,20 +50,29 @@ def get_habr_news(html):
 
 Base = declarative_base()
 
+# class Post(Base):
+#     __tablename__ = 'post'
+#     id = Column(Integer, primary_key=True)
+#     title = Column(String)
+#     avtor = Column(String)
+#     url = Column(String)
+
+# def __repr__(self):
+#     return '<Post {} {} {}>'.format(self.title, self.avtor, self.url)
+
 class Post(Base):
     __tablename__ = 'post'
     id = Column(Integer, primary_key=True)
     title = Column(String)
     avtor = Column(String)
     url = Column(String)
-   
+
+    def __repr__(self):
+        return '<Post {} {} {}>'.format(self.title, self.avtor, self.url)
+
 from sqlalchemy.orm import sessionmaker
 Session = sessionmaker(bind = engine)
 session = Session()
-
-class Post(object):
-    def __repr__(self):
-        return '<Post {} {} {}>'.format(self.title, self.avtor, self.url)
 
 def write_news_bd(res):
     for new_post in res:
