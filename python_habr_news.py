@@ -61,6 +61,10 @@ from sqlalchemy.orm import sessionmaker
 Session = sessionmaker(bind = engine)
 session = Session()
 
+class Post(object):
+    def __repr__(self):
+        return '<Post {} {} {}>'.format(self.title, self.avtor, self.url)
+
 def write_news_bd(res):
     for new_post in res:
         p1 = Post(title = new_post['title'], avtor = new_post['avtor'], url = new_post['url'])
