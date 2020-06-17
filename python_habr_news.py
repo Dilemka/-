@@ -64,7 +64,8 @@ session = Session()
 def write_news_bd(res):
     for new_post in res:
         p1 = Post(title = new_post['title'], avtor = new_post['avtor'], url = new_post['url'])
-        
+        print(p1)
+
     session.add(p1)
     session.commit()
 
