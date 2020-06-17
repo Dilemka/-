@@ -51,19 +51,19 @@ def get_habr_news(html):
 Base = declarative_base()
 
 class Post(Base):
-    __tablename__ = 'Post_habr'
+    __tablename__ = 'post'
     id = Column(Integer, primary_key=True)
-    name = Column(String)
-    address = Column(String)
-    email = Column(String)
+    title = Column(String)
+    avtor = Column(String)
+    url = Column(String)
    
 from sqlalchemy.orm import sessionmaker
 Session = sessionmaker(bind = engine)
 session = Session()
 
-def write_news_csv(res):
+def write_news_bd(res):
     for new_post in res:
-        p1 = Post(new_post['title'], new_post['avtor'], new_post['url'])
+        p1 = Post(title = new_post['title'], avtor = new_post['avtor'], url = new_post['url'])
         
     session.add(p1)
     session.commit()
@@ -73,3 +73,4 @@ if __name__ == "__main__":
     if html:
         get_habr_news(html)
         res = get_habr_news(html)
+        write_news_bd(res)
