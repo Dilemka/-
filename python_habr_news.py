@@ -36,29 +36,7 @@ def get_habr_news(html):
         })
     return result_all_news
 
-# def write_news_csv(res):
-
-    # for new_post in res:
-    #     post = Post(new_post['title'], new_post['avtor'], new_post['url'])
-    #     writer = csv.DictWriter(f, post)
-    #     writer.writerow(new_post)
-    #     # for all in res:
-    #     #     fields = ['title', 'avtor', "url"]
-    #     #     writer = csv.DictWriter(f, fields, delimiter=";")
-    #     #     # writer.writeheader()
-    #     #     writer.writerow(all)
-
 Base = declarative_base()
-
-# class Post(Base):
-#     __tablename__ = 'post'
-#     id = Column(Integer, primary_key=True)
-#     title = Column(String)
-#     avtor = Column(String)
-#     url = Column(String)
-
-# def __repr__(self):
-#     return '<Post {} {} {}>'.format(self.title, self.avtor, self.url)
 
 class Post(Base):
     __tablename__ = 'post'
@@ -77,9 +55,7 @@ session = Session()
 def write_news_bd(res):
     for new_post in res:
         p1 = Post(title = new_post['title'], avtor = new_post['avtor'], url = new_post['url'])
-        print(p1)
-
-    session.add(p1)
+        session.add(p1)
     session.commit()
 
 if __name__ == "__main__":
