@@ -79,8 +79,7 @@ def write_news_bd(res):
 
 def data_published_bd(data_published):
     return session.query(Post).\
-        filter(Post.data_time_published > data_published).all()
-
+        filter(Post.data_time_published == data_published).all()
 
 if __name__ == "__main__":
     Session = sessionmaker(bind=engine)
@@ -90,5 +89,5 @@ if __name__ == "__main__":
     #     get_habr_news(html)
     #     res = get_habr_news(html)
     #     write_news_bd(res)
-    date_time = data_published_bd(3)
-    print(date_time)
+    list_posts = data_published_bd("сегодня в 18:01")
+    print(list_posts)
