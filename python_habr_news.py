@@ -77,9 +77,9 @@ def write_news_bd(res):
         return False
 
 
-def avtor_post_bd(avtor_post):
+def data_published_bd(data_published):
     return session.query(Post).\
-        filter(Post.avtor == avtor_post()).all
+        filter(Post.data_time_published > data_published).all()
 
 
 if __name__ == "__main__":
@@ -90,5 +90,5 @@ if __name__ == "__main__":
     #     get_habr_news(html)
     #     res = get_habr_news(html)
     #     write_news_bd(res)
-    avtor_number = avtor_post_bd('alexzfort')
-    print(avtor_number)
+    date_time = data_published_bd(3)
+    print(date_time)
