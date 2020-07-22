@@ -9,7 +9,8 @@ post_list = Table('post', metadata,
     Column('id', Integer, primary_key=True),
     Column('title', String, nullable=False),
     Column('avtor', String, nullable=False),
-    Column('url', String, nullable=False)
+    Column('url', String, nullable=False, unique=True),
+    Column('data_time_published', Integer)
 )
 
 metadata.create_all(engine)
