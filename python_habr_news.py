@@ -36,7 +36,7 @@ def get_habr_news(html):
             "span",
             class_="user-info__nickname user-info__nickname_small").text
         url = news.find("a", class_="post__title_link")["href"]
-        data_time_published = news.find(class_="post__time").text
+        data_time_published = datetime.datetime(news.find("data-time_published", class_="post__time").('Y-M-DTH:MZ'))
         result_all_news.append({
             "title": title,
             "avtor": avtor,
@@ -58,9 +58,9 @@ class Post(Base):
     data_time_published = Column(Integer)
 
 
-def __repr__(self):
-    return '<Post {} {} {}>'.\
-        format(self.title, self.avtor, self.url, self.data_time_published)
+    def __repr__(self):
+        return '<Post {} {} {}>'.\
+            format(self.title, self.avtor, self.url, self.data_time_published)
 
 
 def write_news_bd(res):
@@ -95,10 +95,10 @@ if __name__ == "__main__":
     Session = sessionmaker(bind=engine)
     session = Session()
     html = get_html("https://www.habr.com/ru/all/")
-    # if html:
-    #     get_habr_news(html)
-    #     res = get_habr_news(html)
-    #     write_news_bd(res)
+    if html:
+        get_habr_news(html)
+        res = get_habr_news(html)
+        write_news_bd(res)
     list_posts = data_published_bd("сегодня в 17:58")
     posts = list_post_bd(list_posts)
     print(posts)
