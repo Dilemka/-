@@ -74,12 +74,22 @@ def write_news_bd(res):
         session.commit()
     except IntegrityError:
         print("Урл не уникален")
-        return False
+        # return False
 
 
 def data_published_bd(data_published):
-    return session.query(Post).\
-        filter(Post.data_time_published == data_published).all()
+    try:
+        return session.query(Post).\
+            filter(Post.data_time_published == data_published).all()
+    except InvalidRequestError:
+        print("Урл не уникален 2")
+        return False
+
+
+def list_post_bd(list_posts):
+    for posts in list_posts:
+        return posts
+
 
 if __name__ == "__main__":
     Session = sessionmaker(bind=engine)
@@ -89,5 +99,6 @@ if __name__ == "__main__":
     #     get_habr_news(html)
     #     res = get_habr_news(html)
     #     write_news_bd(res)
-    list_posts = data_published_bd("сегодня в 18:01")
-    print(list_posts)
+    list_posts = data_published_bd("сегодня в 17:58")
+    posts = list_post_bd(list_posts)
+    print(posts)
