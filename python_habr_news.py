@@ -36,7 +36,7 @@ def get_habr_news(html):
             "span",
             class_="user-info__nickname user-info__nickname_small").text
         url = news.find("a", class_="post__title_link")["href"]
-        data_time_published = datetime.datetime(news.find("data-time_published", class_="post__time").('Y-M-DTH:MZ'))
+        data_time_published = news.find("data-time_published", class_="post__time").time.text
         result_all_news.append({
             "title": title,
             "avtor": avtor,
